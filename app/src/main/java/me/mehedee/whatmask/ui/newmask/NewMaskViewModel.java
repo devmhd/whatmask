@@ -32,6 +32,7 @@ public class NewMaskViewModel extends AndroidViewModel {
     public MutableLiveData<String> maskModel;
     public MutableLiveData<Date> purchasedAt;
     public MutableLiveData<Boolean> isSafeAfterPurchase;
+    public MutableLiveData<Boolean> isActive;
     public MutableLiveData<String> dateString;
     public MutableLiveData<Boolean> kamShesh;
 
@@ -45,6 +46,7 @@ public class NewMaskViewModel extends AndroidViewModel {
             maskModel = new MutableLiveData<>("");
             purchasedAt = new MutableLiveData<>(new Date());
             isSafeAfterPurchase = new MutableLiveData<>(false);
+            isActive = new MutableLiveData<>(true);
 
             isEditingMode = false;
         } else {
@@ -52,6 +54,7 @@ public class NewMaskViewModel extends AndroidViewModel {
             maskModel = new MutableLiveData<>(maskToEdit.model);
             purchasedAt = new MutableLiveData<>(new Date(maskToEdit.purchasedAt.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
             isSafeAfterPurchase = new MutableLiveData<>(maskToEdit.isSafeRightAfterPurchase);
+            isActive = new MutableLiveData<>(maskToEdit.isActive);
             maskId = maskToEdit.uid;
             isEditingMode = true;
         }
@@ -73,6 +76,7 @@ public class NewMaskViewModel extends AndroidViewModel {
         mask.model = this.maskModel.getValue();
         mask.purchasedAt = this.purchasedAt.getValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         mask.isSafeRightAfterPurchase = this.isSafeAfterPurchase.getValue();
+        mask.isActive = this.isActive.getValue();
 
         if (isEditingMode){
 
@@ -106,6 +110,7 @@ public class NewMaskViewModel extends AndroidViewModel {
                 ", maskModel=" + maskModel +
                 ", purchasedAt=" + purchasedAt +
                 ", isSafeAfterPurchase=" + isSafeAfterPurchase +
+                ", isActive=" + isActive +
                 ", dateString=" + dateString +
                 ", kamShesh=" + kamShesh +
                 '}';

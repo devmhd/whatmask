@@ -65,7 +65,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tilName"
             tools:text="PURCHASED : 2020 JUL 12 12:24 PM" />
 
-        <Switch
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switchSafeToUseRightAfter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -75,6 +75,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnPurchaseTimePicker" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchIsActive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:checked="@={vm.isActive}"
+            android:text="@string/acive"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switchSafeToUseRightAfter" />
 
         <Button
             android:id="@+id/btnSave"

@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import me.mehedee.whatmask.SafetyAndActiveWiseMaskComparator;
 import me.mehedee.whatmask.model.MaskDetail;
 import me.mehedee.whatmask.storage.db.DB;
 import me.mehedee.whatmask.storage.db.Mask;
@@ -16,7 +17,7 @@ public class Repository {
 
         return allMasks.stream()
                 .map(mask -> new MaskDetail(mask, DB.getDao(context).getMaskHistory(mask.uid)))
-                .sorted((m1, m2) -> m1.effectiveLastUsageTime.compareTo(m2.effectiveLastUsageTime))
+                .sorted(new SafetyAndActiveWiseMaskComparator())
                 .collect(Collectors.toList());
 
     }

@@ -17,4 +17,5 @@
     <string name="model">Model</string>
     <string name="usages_of_this_mask">USAGES OF THIS MASK</string>
     <string name="no_mask_saved_notice">No mask information is saved.\nPress the \'+\' button below to add a mask</string>
+    <string name="acive">Acive</string>
 </resources>

@@ -23,6 +23,7 @@ public class MaskDetail {
     public boolean isNew;
     public LocalDateTime effectiveLastUsageTime;
     public Mask mask;
+    public boolean isActive;
 
 
     public MaskDetail(Mask mask, List<UsageHistory> usages) {
@@ -30,7 +31,7 @@ public class MaskDetail {
         this.mask = mask;
         this.usageCount = usages.size();
         this.isNew = usages.isEmpty();
-
+        this.isActive = mask.isActive;
 
         if (this.isNew) {
 

@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -43,4 +44,10 @@ public interface MaskDao {
 
     @Query("SELECT * from Mask")
     List<Mask> getAllMasks();
+
+    @Query("SELECT Max(end_time) from usagehistory")
+    Single<Date> getMaxUsageTime();
+
+    @Query("delete from UsageHistory WHERE mask_Id = :maskId")
+    Single<Integer> deleteAllUsagesOfMask(int maskId);
 }

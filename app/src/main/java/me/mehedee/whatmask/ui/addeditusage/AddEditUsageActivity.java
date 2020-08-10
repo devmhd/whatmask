@@ -1,13 +1,13 @@
 package me.mehedee.whatmask.ui.addeditusage;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.os.Bundle;
-import android.util.Log;
 
 import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment;
 
@@ -31,6 +31,12 @@ public class AddEditUsageActivity extends AppCompatActivity {
         Mask m = getIntent().getExtras().getParcelable("MASK");
         UsageHistory u = getIntent().getExtras().getParcelable("UH");
 
+        if (u == null)
+            getSupportActionBar().setTitle("Add new usage entry");
+        else
+            getSupportActionBar().setTitle("Update usage entry");
+
+
         AddEditUsageViewModel vm = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
             @Override
@@ -42,7 +48,7 @@ public class AddEditUsageActivity extends AppCompatActivity {
         binding.setVm(vm);
         binding.setLifecycleOwner(this);
 
-        vm.kamShesh.observe(this, kamShesh ->{
+        vm.kamShesh.observe(this, kamShesh -> {
             if (kamShesh)
                 this.finish();
         });

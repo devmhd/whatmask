@@ -35,6 +35,9 @@ public class Mask implements Parcelable {
     @ColumnInfo(name = "is_safe_after_purchase")
     public Boolean isSafeRightAfterPurchase;
 
+    @ColumnInfo(name = "is_active")
+    public Boolean isActive;
+
     public Mask() {
     }
 
@@ -69,6 +72,7 @@ public class Mask implements Parcelable {
                 ", model='" + model + '\'' +
                 ", purchasedAt=" + purchasedAt +
                 ", isSafeRightAfterPurchase=" + isSafeRightAfterPurchase +
+                ", isActive=" + isActive +
                 '}';
     }
 
@@ -82,6 +86,7 @@ public class Mask implements Parcelable {
         out.writeString(model);
         out.writeString(purchasedAt.format(localTimeFormatter));
         out.writeInt(isSafeRightAfterPurchase ? 1 : 0);
+        out.writeInt(isActive ? 1 : 0);
     }
 
     public static final Parcelable.Creator<Mask> CREATOR
@@ -101,5 +106,6 @@ public class Mask implements Parcelable {
         model = in.readString();
         purchasedAt = LocalDateTime.parse(in.readString(), localTimeFormatter);
         isSafeRightAfterPurchase = in.readInt() > 0;
+        isActive = in.readInt() > 0;
     }
 }

@@ -122,7 +122,10 @@ public class MainActivity extends AppCompatActivity {
 
             Log.d(this.getClass().getName(), "onContextItemSelected: Deleting mask: " + convict.toString());
 
-            DB.getDao(getApplicationContext()).deleteMask(convict)
+            DB.getDao(getApplicationContext())
+                    .deleteMask(convict)
+                    .mergeWith(DB.getDao(getApplicationContext())
+                            .deleteAllUsagesOfMask(convict.uid))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(integer -> {

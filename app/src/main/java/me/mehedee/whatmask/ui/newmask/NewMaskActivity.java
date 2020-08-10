@@ -34,6 +34,11 @@ public class NewMaskActivity extends AppCompatActivity {
             mask = getIntent().getExtras().getParcelable("MASK");
         }
 
+        if (mask!=null)
+            getSupportActionBar().setTitle("Change mask properties");
+        else
+            getSupportActionBar().setTitle("Add new mask");
+
         Mask finalMask = mask;
         NewMaskViewModel vm = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
