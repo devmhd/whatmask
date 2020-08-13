@@ -18,6 +18,7 @@ import java.util.Locale;
 import me.mehedee.whatmask.R;
 import me.mehedee.whatmask.databinding.ActivityNewMaskBinding;
 import me.mehedee.whatmask.storage.db.Mask;
+import me.mehedee.whatmask.ui.stylepicker.MaskStylePickerDialog;
 
 public class NewMaskActivity extends AppCompatActivity {
 
@@ -30,11 +31,11 @@ public class NewMaskActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
 
         Mask mask = null;
-        if (getIntent().hasExtra("MASK")){
+        if (getIntent().hasExtra("MASK")) {
             mask = getIntent().getExtras().getParcelable("MASK");
         }
 
-        if (mask!=null)
+        if (mask != null)
             getSupportActionBar().setTitle("Change mask properties");
         else
             getSupportActionBar().setTitle("Add new mask");
@@ -49,7 +50,7 @@ public class NewMaskActivity extends AppCompatActivity {
         }).get(NewMaskViewModel.class);
         binding.setVm(vm);
 
-        vm.kamShesh.observe(this, kamShesh ->{
+        vm.kamShesh.observe(this, kamShesh -> {
             if (kamShesh)
                 this.finish();
         });
@@ -87,9 +88,13 @@ public class NewMaskActivity extends AppCompatActivity {
                 }
             });
 
-
             dateTimeDialogFragment.show(getSupportFragmentManager(), "dialog_time");
         });
+
+        binding.btnChangeStyle.setOnClickListener(v -> {
+            new MaskStylePickerDialog(vm::setStyle).show(getSupportFragmentManager(), "DIAG_PICKSTYLE");
+        });
+
 
     }
 }

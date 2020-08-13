@@ -1,6 +1,5 @@
 package me.mehedee.whatmask.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -23,15 +22,12 @@ public class MaskDetail {
     public boolean isNew;
     public LocalDateTime effectiveLastUsageTime;
     public Mask mask;
-    public boolean isActive;
-
 
     public MaskDetail(Mask mask, List<UsageHistory> usages) {
 
         this.mask = mask;
         this.usageCount = usages.size();
         this.isNew = usages.isEmpty();
-        this.isActive = mask.isActive;
 
         if (this.isNew) {
 

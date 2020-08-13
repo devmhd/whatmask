@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
 
         <variable
             name="maskdetail"
@@ -25,8 +26,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="@{maskdetail.isActive ? @drawable/white: @drawable/gray}"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@{maskdetail.mask.isActive ? @drawable/white: @drawable/gray}">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -35,16 +36,18 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
+                app:imageResource="@{maskdetail.mask.styleDrawable}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_mask"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/mask_1" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
                 android:text="@{maskdetail.mask.name}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 app:layout_constraintStart_toStartOf="@+id/textView4"
@@ -56,6 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:text="@{maskdetail.mask.model}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
@@ -176,6 +180,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:text="@{maskdetail.isNew? `Never used` :  `Used ` + (maskdetail.usageCount == 1 ?  `once` : maskdetail.usageCount + ` times`)}"
                 app:layout_constraintStart_toStartOf="@+id/textView3"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"

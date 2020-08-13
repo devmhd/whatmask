@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="me.mehedee.whatmask.storage.db.Mask"/>
+
         <variable
             name="vm"
             type="me.mehedee.whatmask.ui.newmask.NewMaskViewModel" />
@@ -20,12 +22,10 @@
             android:id="@+id/tilModel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
             android:hint="@string/model"
+            app:layout_constraintBottom_toTopOf="@+id/tilName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintStart_toEndOf="@+id/imageView4">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -40,13 +40,10 @@
             android:id="@+id/tilName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="1dp"
             android:hint="@string/give_a_name_for_the_mask"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilModel">
+            app:layout_constraintStart_toEndOf="@+id/btnChangeStyle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -58,11 +55,11 @@
             android:id="@+id/btnPurchaseTimePicker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@{`PURCHASED ` + vm.dateString}"
             app:layout_constraintEnd_toEndOf="@+id/tilName"
-            app:layout_constraintStart_toStartOf="@+id/tilName"
-            app:layout_constraintTop_toBottomOf="@+id/tilName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4"
             tools:text="PURCHASED : 2020 JUL 12 12:24 PM" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
@@ -96,5 +93,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:onClick="@{(v) -> vm.save()}"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/mask_2"
+            app:imageResource="@{vm.maskStyleDrawable}" />
+
+        <Button
+            android:id="@+id/btnChangeStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Change style"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintEnd_toEndOf="@+id/imageView4"
+            app:layout_constraintStart_toStartOf="@+id/imageView4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

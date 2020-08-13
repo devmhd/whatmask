@@ -16,6 +16,8 @@ import com.google.gson.JsonSerializer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import me.mehedee.whatmask.R;
+
 @Entity
 public class Mask implements Parcelable {
     private static final DateTimeFormatter localTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -37,6 +39,9 @@ public class Mask implements Parcelable {
 
     @ColumnInfo(name = "is_active")
     public Boolean isActive;
+
+    @ColumnInfo(name = "style")
+    public Integer style;
 
     public Mask() {
     }
@@ -73,6 +78,7 @@ public class Mask implements Parcelable {
                 ", purchasedAt=" + purchasedAt +
                 ", isSafeRightAfterPurchase=" + isSafeRightAfterPurchase +
                 ", isActive=" + isActive +
+                ", style=" + style +
                 '}';
     }
 
@@ -87,6 +93,7 @@ public class Mask implements Parcelable {
         out.writeString(purchasedAt.format(localTimeFormatter));
         out.writeInt(isSafeRightAfterPurchase ? 1 : 0);
         out.writeInt(isActive ? 1 : 0);
+        out.writeInt(style);
     }
 
     public static final Parcelable.Creator<Mask> CREATOR
@@ -107,5 +114,33 @@ public class Mask implements Parcelable {
         purchasedAt = LocalDateTime.parse(in.readString(), localTimeFormatter);
         isSafeRightAfterPurchase = in.readInt() > 0;
         isActive = in.readInt() > 0;
+        style = in.readInt();
+    }
+
+    public int getStyleDrawable() {
+        return drawableFromStyle(this.style);
+    }
+
+    public static int drawableFromStyle(int style) {
+        switch (style) {
+            case 0:
+                return R.drawable.mask_1;
+            case 1:
+                return R.drawable.mask_2;
+            case 2:
+                return R.drawable.mask_3;
+            case 3:
+                return R.drawable.mask_4;
+            case 4:
+                return R.drawable.mask_5;
+            case 5:
+                return R.drawable.mask_6;
+            case 6:
+                return R.drawable.mask_7;
+            case 7:
+                return R.drawable.mask_8;
+            default:
+                return R.drawable.mask_9;
+        }
     }
 }

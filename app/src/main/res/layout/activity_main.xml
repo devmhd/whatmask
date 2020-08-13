@@ -21,7 +21,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -31,7 +31,7 @@
                 android:id="@+id/textView15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="32dp"
                 android:gravity="center_horizontal"
                 android:text="Last usage entry"
                 android:textAllCaps="true"
@@ -46,11 +46,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:fontFamily="@font/open_sans_light"
                 android:gravity="center_horizontal"
-                android:textAllCaps="true"
-                android:textColor="@color/cardview_light_background"
                 android:text="@{vm.lastUsageAgo}"
+                android:textAllCaps="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/cardview_light_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView15"
@@ -60,12 +61,14 @@
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Aug 13, 3:45 PM"
-                android:textColor="@color/cardview_light_background"
+                android:layout_marginBottom="32dp"
                 android:text="@{vm.lastUsageDateString}"
+                android:textColor="@color/cardview_light_background"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintTop_toBottomOf="@+id/textView16"
+                tools:text="Aug 13, 3:45 PM" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

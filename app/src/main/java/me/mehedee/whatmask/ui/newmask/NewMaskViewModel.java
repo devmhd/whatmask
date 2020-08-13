@@ -35,6 +35,8 @@ public class NewMaskViewModel extends AndroidViewModel {
     public MutableLiveData<Boolean> isActive;
     public MutableLiveData<String> dateString;
     public MutableLiveData<Boolean> kamShesh;
+    public MutableLiveData<Integer> maskStyleDrawable;
+    public MutableLiveData<Integer> maskStyle;
 
     public NewMaskViewModel(@NonNull Application application, Mask maskToEdit) {
         super(application);
@@ -47,7 +49,8 @@ public class NewMaskViewModel extends AndroidViewModel {
             purchasedAt = new MutableLiveData<>(new Date());
             isSafeAfterPurchase = new MutableLiveData<>(false);
             isActive = new MutableLiveData<>(true);
-
+            maskStyleDrawable = new MutableLiveData<>(Mask.drawableFromStyle(0));
+            maskStyle = new MutableLiveData<>(0);
             isEditingMode = false;
         } else {
             maskName = new MutableLiveData<>(maskToEdit.name);
@@ -56,6 +59,8 @@ public class NewMaskViewModel extends AndroidViewModel {
             isSafeAfterPurchase = new MutableLiveData<>(maskToEdit.isSafeRightAfterPurchase);
             isActive = new MutableLiveData<>(maskToEdit.isActive);
             maskId = maskToEdit.uid;
+            maskStyle = new MutableLiveData<>(maskToEdit.style);
+            maskStyleDrawable = new MutableLiveData<>(Mask.drawableFromStyle(maskToEdit.style));
             isEditingMode = true;
         }
 
@@ -65,6 +70,11 @@ public class NewMaskViewModel extends AndroidViewModel {
     public void setPurchasedAt(Date d) {
         purchasedAt.setValue(d);
         dateString.setValue(TimeAgo.using(d.getTime()));
+    }
+
+    public void setStyle(int style) {
+        maskStyle.setValue(style);
+        maskStyleDrawable.setValue(Mask.drawableFromStyle(style));
     }
 
 
@@ -77,8 +87,9 @@ public class NewMaskViewModel extends AndroidViewModel {
         mask.purchasedAt = this.purchasedAt.getValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         mask.isSafeRightAfterPurchase = this.isSafeAfterPurchase.getValue();
         mask.isActive = this.isActive.getValue();
+        mask.style = this.maskStyle.getValue();
 
-        if (isEditingMode){
+        if (isEditingMode) {
 
             mask.uid = maskId;
             d = DB.getDao(getApplication()).updateMask(mask)
